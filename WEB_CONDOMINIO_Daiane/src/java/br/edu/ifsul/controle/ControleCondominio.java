@@ -5,9 +5,9 @@
  */
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.dao.LocatarioDAO;
-import br.edu.ifsul.dao.PessoaDAO;
-import br.edu.ifsul.modelo.Pessoa;
+import br.edu.ifsul.dao.CondominioDAO;
+import br.edu.ifsul.dao.RecursoDAO;
+import br.edu.ifsul.modelo.Condominio;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -17,38 +17,48 @@ import javax.faces.bean.SessionScoped;
  *
  * @author daiah
  */
-@ManagedBean(name = "controlePessoa")
+@ManagedBean(name = "controleCondominio")
 @SessionScoped
-public class ControlePessoa implements Serializable{
-    private PessoaDAO<Pessoa> dao;
-    private Pessoa obj;
-    private LocatarioDAO daoLocatario;
+public class ControleCondominio implements Serializable{
+    
+    private CondominioDAO<Condominio> dao;
+    private Condominio obj;
+    private RecursoDAO daoRecurso;
 
-    public ControlePessoa() {
-        dao = new PessoaDAO<Pessoa>();
-        daoLocatario = new LocatarioDAO();
+    public ControleCondominio() {
+        dao = new CondominioDAO();
+        daoRecurso = new RecursoDAO();
     }
 
-    public PessoaDAO<Pessoa> getDao() {
+    public CondominioDAO<Condominio> getDao() {
         return dao;
     }
 
-    public Pessoa getObj() {
+    public void setDao(CondominioDAO<Condominio> dao) {
+        this.dao = dao;
+    }
+
+    public Condominio getObj() {
         return obj;
     }
 
-    public void setObj(Pessoa obj) {
+    public void setObj(Condominio obj) {
         this.obj = obj;
     }
-    
-    
-    
+
+    public RecursoDAO getDaoRecurso() {
+        return daoRecurso;
+    }
+
+    public void setDaoRecurso(RecursoDAO daoRecurso) {
+        this.daoRecurso = daoRecurso;
+    }
     public String listar(){
-        return "/privado/pessoa/listar?faces-redirect=true";
+        return "/privado/condominio/listar?faces-redirect=true";
     }
     
     public String novo(){
-        obj = new Pessoa();
+        obj = new Condominio();
         return "formulario?faces-redirect=true";
     }
     
@@ -88,15 +98,6 @@ public class ControlePessoa implements Serializable{
             Util.mensagemErro(dao.getMensagem());
     }
 
-    public LocatarioDAO getDaoLocatario() {
-        return daoLocatario;
-    }
-
-    public void setDaoLocatario(LocatarioDAO daoLocatario) {
-        this.daoLocatario = daoLocatario;
-    }
-
 }
-
 
 

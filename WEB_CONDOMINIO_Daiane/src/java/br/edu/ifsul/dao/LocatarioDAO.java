@@ -5,19 +5,17 @@
  */
 package br.edu.ifsul.dao;
 
-
-import br.edu.ifsul.modelo.Pessoa;
+import br.edu.ifsul.modelo.Locatario;
 import java.io.Serializable;
-
 
 /**
  *
  * @author daiah
  */
-public class PessoaDAO <TIPO> extends DAOGenerico<Pessoa> implements Serializable {
-
-    public PessoaDAO() {
+public class LocatarioDAO<TIPO> extends DAOGenerico<Locatario> implements Serializable{
+    public LocatarioDAO(){
         super();
-        classePersistente = Pessoa.class;
+        classePersistente = Locatario.class;
     }
+    
 }

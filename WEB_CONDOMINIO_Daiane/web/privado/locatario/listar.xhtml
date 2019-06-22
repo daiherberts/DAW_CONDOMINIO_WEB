@@ -7,62 +7,61 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
       
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo"> Listagem de Pessoa</ui:define>
+        <ui:define name="titulo"> Listagem de Locatario</ui:define>
         <ui:define name="conteudo">
             <h:form>
                 <p:messages/>
                 <p:growl/>
                 <p:commandButton value="Novo"
-                                 action="#{controlePessoa.novo()}"
+                                 action="#{controleLocatario.novo()}"
                                  ajax="false"
                                  icon="ui-icon-plus"/>
                 <div align="center">
                     <p:panelGrid columns="11">
                         <p:outputLabel value="Ordem: "/>
                         <p:selectOneMenu id="ordem"
-                                         value="#{controlePessoa.dao.ordem}">
+                                         value="#{controleLocatario.dao.ordem}">
                             <f:selectItem itemLabel="ID" itemValue="id"/>
                             <f:selectItem itemLabel="Nome" itemValue="nome"/>
-                            <f:selectItem itemLabel="Pais" itemValue="pais.nome"/>
-                                <p:ajax update="listagem"/>
+                               <p:ajax update="listagem"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Filtro: "/>
-                        <p:inputText value="#{controlePessoa.dao.filtro}">
+                        <p:inputText value="#{controleLocatario.dao.filtro}">
                             <p:ajax event="keyup" update="listagem"/>
                         </p:inputText>
                         <p:commandButton value="Filtrar"
                                          update="listagem"/>
                         <p:outputLabel value="Máximo de objetos: "/>
-                        <p:inputNumber value="#{controlePessoa.dao.maximoObjetos}"
+                        <p:inputNumber value="#{controleLocatario.dao.maximoObjetos}"
                                        size="3"
                                        thousandSeparator=""
                                        decimalSeparator=""
                                        decimalPlaces="0">
                             <p:ajax event="keyup" update="listagem"/>
                         </p:inputNumber>
-                        <p:commandButton action="#{controlePessoa.dao.primeiro()}"
+                        <p:commandButton action="#{controleLocatario.dao.primeiro()}"
                                          title="Primeiro"
                                          icon="ui-icon-seek-first"
                                          update="listagem"/>
-                        <p:commandButton action="#{controlePessoa.dao.anterior()}"
+                        <p:commandButton action="#{controleLocatario.dao.anterior()}"
                                          title="Anterior"
                                          icon="ui-icon-seek-prev"
                                          update="listagem"/>
-                        <p:commandButton action="#{controlePessoa.dao.proximo()}"
+                        <p:commandButton action="#{controleLocatario.dao.proximo()}"
                                          title="Proximo"
                                          icon="ui-icon-seek-next"
                                          update="listagem"/>
-                        <p:commandButton action="#{controlePessoa.dao.ultimo()}"
+                        <p:commandButton action="#{controleLocatario.dao.ultimo()}"
                                          title="Ultimo"
                                          icon="ui-icon-seek-end"
                                          update="listagem"/>
                     </p:panelGrid>
                 </div>
-                <p:dataTable value="#{controlePessoa.dao.listaTodos}" 
+                <p:dataTable value="#{controleLocatario.dao.listaTodos}" 
                              var="item" 
                              id="listagem">
                     <f:facet name="footer">
-                        <p:outputLabel value="#{controlePessoa.dao.mensagemNavegacao}"/>
+                        <p:outputLabel value="#{controleLocatario.dao.mensagemNavegacao}"/>
                     </f:facet>
                     <p:column headerText="ID">
                         <p:outputLabel value="#{item.id}"/>
@@ -73,14 +72,17 @@
                     <p:column headerText="CPF">
                         <p:outputLabel value="#{item.cpf}"/>
                     </p:column>
-             
+                     <p:column headerText="Renda">
+                        <p:outputLabel value="#{item.pessoa.renda}"/>
+                    </p:column>
+
                     
                     <p:column headerText="Ações">
-                        <p:commandButton action="#{controlePessoa.editar(item.id)}"
+                        <p:commandButton action="#{controleLocatario.editar(item.id)}"
                                          ajax="false"
                                          icon="ui-icon-pencil"
                                          title="Editar"/>
-                        <p:commandButton action="#{controlePessoa.remover(item.id)}"
+                        <p:commandButton action="#{controleLocatario.remover(item.id)}"
                                          ajax="false"
                                          icon="ui-icon-trash"
                                          title="Remover"

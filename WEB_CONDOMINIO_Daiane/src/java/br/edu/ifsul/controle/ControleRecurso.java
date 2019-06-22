@@ -5,50 +5,52 @@
  */
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.dao.LocatarioDAO;
-import br.edu.ifsul.dao.PessoaDAO;
-import br.edu.ifsul.modelo.Pessoa;
+import br.edu.ifsul.dao.CondominioDAO;
+import br.edu.ifsul.dao.RecursoDAO;
+import br.edu.ifsul.modelo.Recurso;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author daiah
  */
-@ManagedBean(name = "controlePessoa")
-@SessionScoped
-public class ControlePessoa implements Serializable{
-    private PessoaDAO<Pessoa> dao;
-    private Pessoa obj;
-    private LocatarioDAO daoLocatario;
+public class ControleRecurso implements Serializable{
+    private RecursoDAO<Recurso> dao;
+    private Recurso obj;
+    private CondominioDAO daoCondominio;
 
-    public ControlePessoa() {
-        dao = new PessoaDAO<Pessoa>();
-        daoLocatario = new LocatarioDAO();
+    public ControleRecurso() {
+        dao = new RecursoDAO();
+        daoCondominio = new CondominioDAO();
     }
 
-    public PessoaDAO<Pessoa> getDao() {
+    public RecursoDAO<Recurso> getDao() {
         return dao;
     }
 
-    public Pessoa getObj() {
+    public Recurso getObj() {
         return obj;
     }
 
-    public void setObj(Pessoa obj) {
+    public void setObj(Recurso obj) {
         this.obj = obj;
     }
-    
-    
+
+    public CondominioDAO getDaoCondominio() {
+        return daoCondominio;
+    }
+
+    public void setDaoCondominio(CondominioDAO daoCondominio) {
+        this.daoCondominio = daoCondominio;
+    }
     
     public String listar(){
-        return "/privado/pessoa/listar?faces-redirect=true";
+        return "/privado/recurso/listar?faces-redirect=true";
     }
     
     public String novo(){
-        obj = new Pessoa();
+        obj = new Recurso();
         return "formulario?faces-redirect=true";
     }
     
@@ -88,13 +90,7 @@ public class ControlePessoa implements Serializable{
             Util.mensagemErro(dao.getMensagem());
     }
 
-    public LocatarioDAO getDaoLocatario() {
-        return daoLocatario;
-    }
 
-    public void setDaoLocatario(LocatarioDAO daoLocatario) {
-        this.daoLocatario = daoLocatario;
-    }
 
 }
 

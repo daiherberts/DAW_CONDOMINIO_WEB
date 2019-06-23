@@ -10,18 +10,22 @@ import br.edu.ifsul.dao.RecursoDAO;
 import br.edu.ifsul.modelo.Recurso;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author daiah
  */
+@ManagedBean(name = "controleRecurso")
+@SessionScoped
 public class ControleRecurso implements Serializable{
     private RecursoDAO<Recurso> dao;
     private Recurso obj;
     private CondominioDAO daoCondominio;
 
     public ControleRecurso() {
-        dao = new RecursoDAO();
+        dao = new  RecursoDAO<Recurso>();
         daoCondominio = new CondominioDAO();
     }
 
@@ -36,15 +40,7 @@ public class ControleRecurso implements Serializable{
     public void setObj(Recurso obj) {
         this.obj = obj;
     }
-
-    public CondominioDAO getDaoCondominio() {
-        return daoCondominio;
-    }
-
-    public void setDaoCondominio(CondominioDAO daoCondominio) {
-        this.daoCondominio = daoCondominio;
-    }
-    
+      
     public String listar(){
         return "/privado/recurso/listar?faces-redirect=true";
     }
@@ -90,7 +86,13 @@ public class ControleRecurso implements Serializable{
             Util.mensagemErro(dao.getMensagem());
     }
 
+    public CondominioDAO getDaoCondominio() {
+        return daoCondominio;
+    }
 
+    public void setDaoCondominiio(CondominioDAO daoCondominio) {
+        this.daoCondominio = daoCondominio;
+    }
 
 }
 

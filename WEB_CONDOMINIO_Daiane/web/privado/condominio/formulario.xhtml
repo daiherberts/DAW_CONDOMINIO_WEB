@@ -11,45 +11,57 @@
             <h:form>
                 <p:growl/>
                 <div align="center">
-                <p:panelGrid columns="2">
-                    <f:facet name="header">
-                        <p:outputLabel value="Dados de Locatário"/>
-                    </f:facet>
-                    <f:facet name="footer">
-                        <div align="center">
-                             <p:commandButton value="Cancelar"
-                                              action="#{controleCondominio.cancelar()}"
-                                              ajax="false"
-                                              immediate="true"/>
-                             <p:commandButton value="Salvar"
-                                              action="#{controleCondominio.salvar()}"
-                                              ajax="false"
-                                              icon="ui-icon-disk"/>
-                        </div>
-                    </f:facet>
-                    <p:outputLabel value="ID"/>
-                    <p:inputText value="#{controleCondominio.obj.id}" 
-                                 readonly="true" 
-                                 size="5"/>
-                    <p:outputLabel value="Nome" for="txtNome"/>
-                    <p:inputText id="txtNome" value="#{controleCondominio.obj.nome}" 
-                                 size="50" 
-                                 maxlength="50"/>
-                    <p:outputLabel value="Endereço" for="txtEndereco"/>
-                    <p:inputText id="txtEndereco" value="#{controleCondominio.obj.endereco}" 
-                                 size="50" 
-                                 maxlength="14"/>
-                    <p:outputLabel value="Número" for="txtNumero"/>
-                    <p:inputText id="txtNumero" value="#{controleCondominio.obj.numero}" 
-                                 size="6" 
-                                 maxlength="5"/>
-                    <p:outputLabel value="CEP" for="txtCEP"/>
-                    <p:inputText id="txtCEP" value="#{controleCondominio.obj.cep}" 
-                                 size="10" 
-                                 maxlength="9"/>
-                                      
-                </p:panelGrid>
-                    </div> 
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">
+                            <p:outputLabel value="Dados de Locatário"/>
+                        </f:facet>
+                        <f:facet name="footer">
+                            <div align="center">
+                                <p:commandButton value="Cancelar"
+                                                 action="#{controleCondominio.cancelar()}"
+                                                 ajax="false"
+                                                 immediate="true"/>
+                                <p:commandButton value="Salvar"
+                                                 action="#{controleCondominio.salvar()}"
+                                                 ajax="false"
+                                                 icon="ui-icon-disk"/>
+                            </div>
+                        </f:facet>
+                        <p:outputLabel value="ID"/>
+                        <p:inputText value="#{controleCondominio.obj.id}" 
+                                     readonly="true" 
+                                     size="5"/>
+                        <p:outputLabel value="Nome" for="txtNome"/>
+                        <p:inputText id="txtNome" value="#{controleCondominio.obj.nome}" 
+                                     size="51" 
+                                     maxlength="50"/>
+                        <p:outputLabel value="Endereço" for="txtEndereco"/>
+                        <p:inputText id="txtEndereco" value="#{controleCondominio.obj.endereco}" 
+                                     size="51" 
+                                     maxlength="50"/>
+                        <p:outputLabel value="Número" for="txtNumero"/>
+                        <p:inputText id="txtNumero" value="#{controleCondominio.obj.numero}" 
+                                     size="6" 
+                                     maxlength="5"/>
+                        <p:outputLabel value="CEP" for="txtCEP"/>
+                        <p:inputText id="txtCEP" value="#{controleCondominio.obj.cep}" 
+                                     size="10" 
+                                     maxlength="9"/>
+ 
+                        <p:outputLabel value="Recurso" for="selectRecurso"/>
+                        <p:selectOneMenu id="selectRecurso" 
+                                         value="#{controleRecurso.obj.condominios}"
+                                         filter="true"
+                                         filterMatchMode="starrWith">
+                            <f:converter converterId="converterRecurso"/>
+                            <f:selectItem noSelectionOption="true"
+                                          itemLabel="Selecione um registro"/>
+                            <f:selectItems value="#{controleRecurso.daoCondominio.listaTodos}"
+                                           var="p"
+                                           itemLabel="#{p.id}"/>  
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                </div> 
             </h:form>
         </ui:define>
     </ui:composition>

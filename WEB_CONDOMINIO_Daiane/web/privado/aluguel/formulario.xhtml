@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="titulo">Formulário de Aluguel</ui:define>
+        <ui:define name="conteudo">
+            <h:form>
+                <p:growl/>
+                <div align="center">
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">
+                            <p:outputLabel value="Dados de Aluguel"/>
+                        </f:facet>
+                        <f:facet name="footer">
+                            <div align="center">
+                                <p:commandButton value="Cancelar"
+                                                 action="#{controleAluguel.cancelar()}"
+                                                 ajax="false"
+                                                 immediate="true"/>
+                                <p:commandButton value="Salvar"
+                                                 action="#{controleAluguel.salvar()}"
+                                                 ajax="false"
+                                                 icon="ui-icon-disk"/>
+                            </div>
+                        </f:facet>
+                        <p:outputLabel value="ID"/>
+                        <p:inputText value="#{controleAluguel.obj.id}" 
+                                     readonly="true" 
+                                     size="5"/>
+                        <p:outputLabel value="Valor" for="txtValor"/>
+                        <p:inputText id="txtValor" value="#{controleAluguel.obj.valor}" 
+                                     size="50" 
+                                     maxlength="50"/>
+
+                        <p:outputLabel value="Inicio"/>
+                        <p:column headerText="Inicio do Contrato">
+                            <p:calendar value="#{controleAluguel.obj.inicioContrato}"
+                                        id="txtIni"
+                                        mask="true" pattern="dd/MM/yyy" navigator="true">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:calendar>
+                        </p:column>
+
+                        <p:outputLabel value="Fim"/>
+                        <p:column headerText="Fim do Contrato">
+                            <p:calendar value="#{controleAluguel.obj.fimContrato}"
+                                        id="txtFim"
+                                        mask="true" pattern="dd/MM/yyy" navigator="true">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:calendar>
+                        </p:column>
+
+                        <p:outputLabel value="Vencimento"/>
+                        <p:column headerText="VendimentoContrato">
+                            <p:calendar value="#{controleAluguel.obj.diaVencimento}"
+                                        id="txtVendimentoContrato"
+                                        mask="true" pattern="dd/MM/yyy" navigator="true">
+                                <f:converter converterId="converterCalendar"/>
+
+                            </p:calendar>
+                        </p:column>
+
+                        <p:outputLabel value="Nº UC" for="txtNumero"/>
+                        <p:inputText id="txtNumero" value="#{controleUC.obj.numero}" 
+                                     size="50" 
+                                     maxlength="50"/>
+
+                        <p:outputLabel value="Desc.UC" for="txtdescricao"/>
+                        <p:inputText id="txtdescricao" value="#{controleUC.obj.descricao}" 
+                                     size="50" 
+                                     maxlength="50"/>
+
+                        <p:outputLabel value="AreaUC" for="txtareaUC"/>
+                        <p:inputText id="txtareaUC" value="#{controleUC.obj.area}" 
+                                     size="50" 
+                                     maxlength="50"/>
+
+                            <p:outputLabel value="Locatario" for="selectLocatario"/>
+                                    <p:selectOneMenu id="selectLocatario" 
+                                                     value="#{controleAluguel.obj.locatario}"
+                                                     filter="true" filterMatchMode="startsWith">
+                                        <f:converter converterId="converterLocatario"/>
+                                        <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro"/>
+                                        <f:selectItems value="#{controleAluguel.daoLocatario.listaTodos}"
+                                                       var="loc" itemLabel="#{loc.nome}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="UnidadeCondominial" for="selectUC"/>
+                                    <p:selectOneMenu id="selectUC" 
+                                                     value="#{controleAluguel.obj.uc}"
+                                                     filter="true" filterMatchMode="startsWith">
+                                        <f:converter converterId="converterUC"/>
+                                        <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro"/>
+                                        <f:selectItems value="#{controleAluguel.daoUC.listaObjetos}"
+                                                       var="loc" itemLabel="#{loc.numero}"/>
+                                    </p:selectOneMenu>
+
+
+
+                    </p:panelGrid>
+                </div> 
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
